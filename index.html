@@ -114,7 +114,93 @@ nav a:hover {
         📘 Computer Notes PDF खोलें
     </a>
 </div>
+<div class="box">
+<h2>📝 MCQ Test</h2>
 
+<p id="question"></p>
+
+<div id="options"></div>
+
+<p id="result"></p>
+
+<button onclick="nextQuestion()">Next Question ➡️</button>
+<button onclick="restartQuiz()">🔄 Restart Test</button>
+</div>
+
+<script>
+let questions = [
+{
+q:"कंप्यूटर का मस्तिष्क किसे कहा जाता है?",
+o:["CPU","RAM","Hard Disk"],
+a:0
+},
+{
+q:"RAM का पूरा नाम क्या है?",
+o:["Random Access Memory","Read Access Memory","Run Access Memory"],
+a:0
+},
+{
+q:"CPU का पूरा नाम क्या है?",
+o:["Central Processing Unit","Computer Processing Unit","Central Program Unit"],
+a:0
+},
+{
+q:"कंप्यूटर में स्थायी मेमोरी कौन-सी है?",
+o:["RAM","Hard Disk","Cache"],
+a:1
+},
+{
+q:"वेबसाइट खोलने के लिए क्या उपयोग होता है?",
+o:["Web Browser","Paint","Calculator"],
+a:0
+}
+];
+
+let current = 0;
+let score = 0;
+
+function showQuestion() {
+    document.getElementById("question").innerText =
+        "Q" + (current + 1) + ". " + questions[current].q;
+
+    let html = "";
+
+    questions[current].o.forEach((option, i) => {
+        html += `<button onclick="checkAnswer(${i})">${option}</button>`;
+    });
+
+    document.getElementById("options").innerHTML = html;
+    document.getElementById("result").innerText = "";
+}
+
+function checkAnswer(answer) {
+    if (answer === questions[current].a) {
+        score++;
+        document.getElementById("result").innerText = "✅ सही उत्तर";
+    } else {
+        document.getElementById("result").innerText = "❌ गलत उत्तर";
+    }
+}
+
+function nextQuestion() {
+    if (current < questions.length - 1) {
+        current++;
+        showQuestion();
+    } else {
+        document.getElementById("question").innerText =
+            "🎉 Test Complete!";
+        document.getElementById("options").innerHTML = "";
+        document.getElementById("result").innerText =
+            "आपका Score: " + score + " / 5";
+    }
+}
+function restartQuiz() {
+    current = 0;
+    score = 0;
+    showQuestion();
+}
+showQuestion();
+</script>
 <div class="box">
     <h2>👤 About Me</h2>
     <p>
@@ -132,45 +218,6 @@ nav a:hover {
         📧 Email करें
     </a>
 </div>
-<div class="box">
-<h2>📝 MCQ Test</h2>
 
-<p>1. कंप्यूटर का मस्तिष्क किसे कहा जाता है?</p>
-<button onclick="checkAnswer(this, true)">CPU</button>
-<button onclick="checkAnswer(this, false)">RAM</button>
-<button onclick="checkAnswer(this, false)">Hard Disk</button>
-
-<p>2. RAM का पूरा नाम क्या है?</p>
-<button onclick="checkAnswer(this, true)">Random Access Memory</button>
-<button onclick="checkAnswer(this, false)">Read Access Memory</button>
-<button onclick="checkAnswer(this, false)">Run Access Memory</button>
-
-<p>3. इंटरनेट पर वेबसाइट खोलने के लिए क्या उपयोग होता है?</p>
-<button onclick="checkAnswer(this, true)">Web Browser</button>
-<button onclick="checkAnswer(this, false)">Calculator</button>
-<button onclick="checkAnswer(this, false)">Paint</button>
-
-<p id="result"></p>
-</div>
-
-<script>
-let score = 0;
-
-function checkAnswer(button, correct) {
-  if (button.disabled) return;
-
-  button.disabled = true;
-
-  if (correct) {
-    score++;
-    button.innerHTML += " ✅";
-  } else {
-    button.innerHTML += " ❌";
-  }
-
-  document.getElementById("result").innerHTML =
-    "आपका Score: " + score + " / 3";
-}
-</script>
 </body>
 </html>
