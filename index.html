@@ -132,6 +132,45 @@ nav a:hover {
         📧 Email करें
     </a>
 </div>
+<div class="box">
+<h2>📝 MCQ Test</h2>
 
+<p>1. कंप्यूटर का मस्तिष्क किसे कहा जाता है?</p>
+<button onclick="checkAnswer(this, true)">CPU</button>
+<button onclick="checkAnswer(this, false)">RAM</button>
+<button onclick="checkAnswer(this, false)">Hard Disk</button>
+
+<p>2. RAM का पूरा नाम क्या है?</p>
+<button onclick="checkAnswer(this, true)">Random Access Memory</button>
+<button onclick="checkAnswer(this, false)">Read Access Memory</button>
+<button onclick="checkAnswer(this, false)">Run Access Memory</button>
+
+<p>3. इंटरनेट पर वेबसाइट खोलने के लिए क्या उपयोग होता है?</p>
+<button onclick="checkAnswer(this, true)">Web Browser</button>
+<button onclick="checkAnswer(this, false)">Calculator</button>
+<button onclick="checkAnswer(this, false)">Paint</button>
+
+<p id="result"></p>
+</div>
+
+<script>
+let score = 0;
+
+function checkAnswer(button, correct) {
+  if (button.disabled) return;
+
+  button.disabled = true;
+
+  if (correct) {
+    score++;
+    button.innerHTML += " ✅";
+  } else {
+    button.innerHTML += " ❌";
+  }
+
+  document.getElementById("result").innerHTML =
+    "आपका Score: " + score + " / 3";
+}
+</script>
 </body>
 </html>
