@@ -117,7 +117,7 @@ nav a:hover {
 <div class="box">
 <h2>📝 MCQ Test</h2>
 
-<p id="question"></p>
+<p id="question">Question Loading...</p>
 
 <div id="options"></div>
 
@@ -174,6 +174,12 @@ function showQuestion() {
 }
 
 function checkAnswer(answer) {
+    if (document.getElementById("options").dataset.answered === "yes") {
+        return;
+    }
+
+    document.getElementById("options").dataset.answered = "yes";
+
     if (answer === questions[current].a) {
         score++;
         document.getElementById("result").innerText = "✅ सही उत्तर";
@@ -181,7 +187,6 @@ function checkAnswer(answer) {
         document.getElementById("result").innerText = "❌ गलत उत्तर";
     }
 }
-
 function nextQuestion() {
     if (current < questions.length - 1) {
         current++;
